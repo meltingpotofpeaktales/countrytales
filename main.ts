@@ -1,5 +1,22 @@
 namespace SpriteKind {
-    export const nointeract = SpriteKind.create()
+    export const BACKGROUNDOBJ = SpriteKind.create()
+}
+function loadsave () {
+    if (blockSettings.exists("positionmap")) {
+        movePos = blockSettings.readNumberArray("positionmap")
+        if (movePos[0] == 1) {
+            tiles.setCurrentTilemap(tilemap`level1`)
+        }
+        if (movePos[1] != null) {
+            tiles.setCurrentTilemap(tilemap`level1`)
+        } else if (false) {
+        	
+        } else {
+            tiles.setCurrentTilemap(tilemap`level1`)
+        }
+    } else {
+        tiles.setCurrentTilemap(tilemap`level1`)
+    }
 }
 function play_the_intro () {
     music.play(music.createSoundEffect(WaveShape.Noise, 1813, 1110, 255, 255, 200, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
@@ -133,21 +150,7 @@ browserEvents.Q.onEvent(browserEvents.KeyEvent.Pressed, function () {
             7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
             7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
             `)
-        if (blockSettings.exists("positionmap")) {
-            movePos = blockSettings.readNumberArray("positionmap")
-            if (movePos[0] == 1) {
-                tiles.setCurrentTilemap(tilemap`level1`)
-            }
-            if (movePos[1] != null) {
-                tiles.setCurrentTilemap(tilemap`level1`)
-            } else if (false) {
-            	
-            } else {
-                tiles.setCurrentTilemap(tilemap`level1`)
-            }
-        } else {
-            tiles.setCurrentTilemap(tilemap`level1`)
-        }
+        loadsave()
     }
 })
 let movePos: number[] = []
@@ -171,7 +174,7 @@ title = sprites.create(img`
     ................................
     ................................
     ................................
-    `, SpriteKind.nointeract)
+    `, SpriteKind.BACKGROUNDOBJ)
 animation.runImageAnimation(
 title,
 [img`
